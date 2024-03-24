@@ -10,6 +10,12 @@ env:
   AWS_REGION: ap-northeast-2
 
 jobs:
+  steps:
+    - name: Print S3 Bucket Name
+      run: echo $S3_BUCKET_NAME
+           echo $CODE_DEPLOY_NAME
+           echo $CODE_DEPLOY_GROUP_NAME
+           echo $AWS_REGION
   build:
     runs-on: ubuntu-latest
     steps:
