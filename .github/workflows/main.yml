@@ -51,5 +51,5 @@ jobs:
           --application-name $CODE_DEPLOY_NAME
           --deployment-group-name $CODE_DEPLOY_GROUP_NAME
           --file-exists-behavior OVERWRITE
-          --s3-location bucket=$S3_BUCKET_NAME, bundleType=zip, key=$GITHUB_SHA.zip
+          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$GITHUB_SHA.zip
           --region $AWS_REGION
