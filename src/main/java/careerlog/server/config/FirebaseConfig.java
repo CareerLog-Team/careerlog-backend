@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -16,12 +17,13 @@ public class FirebaseConfig {
 
     @PostConstruct
     public void init() throws IOException {
-        String firebaseSdkPath = "/home/ubuntu/app/src/main/resources/firebase.json";
-        String localFirebaseSdkPath = "/src/main/resources/firebase.json";
+        String firebaseSdkRelativePath = "./src/main/resources/firebase.json";
 
-        log.info("sdk path : {}", firebaseSdkPath);
+        File file = new File(firebaseSdkRelativePath);
+        // Linux 상대 경로 처리 이슈로 인해, 절대 경로로 변환하여 입력
+        String firebaseSdkAbsolutePath = String.valueOf(file.getAbsoluteFile());
 
-        FileInputStream serviceAccount = new FileInputStream(firebaseSdkPath);
+        FileInputStream serviceAccount = new FileInputStream(firebaseSdkAbsolutePath);
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
@@ -29,5 +31,4 @@ public class FirebaseConfig {
         FirebaseApp.initializeApp(options);
         log.info("success to initialize FirebaseApp");
     }
-
 }
