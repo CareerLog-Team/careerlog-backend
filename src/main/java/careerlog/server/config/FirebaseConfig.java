@@ -16,7 +16,8 @@ public class FirebaseConfig {
 
     @PostConstruct
     public void init() throws IOException {
-        String firebaseSdkPath = "src/main/resources/firebase.json";
+        String firebaseSdkPath = "/home/ubuntu/app/src/main/resources/firebase.json";
+        String localFirebaseSdkPath = "/src/main/resources/firebase.json";
 
         log.info("sdk path : {}", firebaseSdkPath);
 
