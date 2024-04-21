@@ -15,11 +15,10 @@ import java.io.IOException;
 @Slf4j
 public class FirebaseConfig {
 
-    @Value("${firebase.sdk.path}")
-    private String firebaseSdkPath;
-
     @PostConstruct
     public void init() throws IOException {
+        String firebaseSdkPath = "src/main/resources/firebase.json";
+
         log.info("sdk path : {}", firebaseSdkPath);
 
         FileInputStream serviceAccount = new FileInputStream(firebaseSdkPath);

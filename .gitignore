@@ -12,7 +12,7 @@ build/
 **/src/test/resources/*.yml
 
 ### Firebase ###
-**/src/main/resources/firebase.json
+# **/src/main/resources/firebase.json
 
 ### STS ###
 .apt_generated
