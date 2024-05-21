@@ -1,7 +1,7 @@
 package careerlog.server.jwt;
 
-import careerlog.server.common.exception.CustomException;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

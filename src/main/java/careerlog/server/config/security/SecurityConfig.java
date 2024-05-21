@@ -1,4 +1,4 @@
-package careerlog.server.config;
+package careerlog.server.config.security;
 
 import careerlog.server.jwt.JwtAuthenticationFilter;
 import careerlog.server.jwt.JwtTokenProvider;

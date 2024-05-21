@@ -1,4 +1,4 @@
-package careerlog.server.common.resultcode;
+package careerlog.server.common.response.resultcode;
 
 
 import lombok.AllArgsConstructor;

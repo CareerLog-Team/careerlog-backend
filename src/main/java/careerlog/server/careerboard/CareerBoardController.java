@@ -4,10 +4,9 @@ import careerlog.server.careerboard.domain.CareerBoard;
 import careerlog.server.careerboard.dto.request.save.SaveRequestDto;
 import careerlog.server.careerboard.dto.response.CareerBoardResponseDto;
 import careerlog.server.careerboard.service.CareerBoardService;
-import careerlog.server.common.dto.ResponseDto;
-import careerlog.server.common.exception.CustomException;
-import careerlog.server.common.resultcode.ResultCode;
-import careerlog.server.config.SecurityUtils;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
+import careerlog.server.config.security.SecurityUtils;
 import careerlog.server.user.domain.User;
 import careerlog.server.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,21 +21,15 @@ public class CareerBoardController {
     private final CareerBoardService careerBoardService;
 
     @GetMapping
-    public ResponseDto<CareerBoardResponseDto> getCareerBoard() {
+    public CareerBoardResponseDto getCareerBoard() {
         User user = userService.getUserById(SecurityUtils.getCurrentUserId());
         CareerBoard careerBoard = careerBoardService.getCareerBoardByUser(user);
-        CareerBoardResponseDto careerBoardResponseDto = CareerBoardResponseDto.toCareerBoardResponseDto(careerBoard);
-
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                careerBoardResponseDto,
-                ResultCode.SUCCESS.getMessage()
-        );
+        return CareerBoardResponseDto.toCareerBoardResponseDto(careerBoard);
     }
 
 
     @PostMapping("/save/{saveType}")
-    public ResponseDto<?> saveCareerBoardItems(
+    public String saveCareerBoardItems(
             @PathVariable String saveType,
             @RequestBody SaveRequestDto saveRequestDto) {
 
@@ -101,10 +94,7 @@ public class CareerBoardController {
                 throw new CustomException(ResultCode.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                ResultCode.SUCCESS.getMessage()
-        );
+        return "ok";
     }
 
 }

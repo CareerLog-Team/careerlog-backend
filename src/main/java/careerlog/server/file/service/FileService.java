@@ -1,8 +1,8 @@
 package careerlog.server.file.service;
 
 
-import careerlog.server.common.exception.CustomException;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
 import careerlog.server.file.domain.File;
 import careerlog.server.file.repository.FileRepository;
 import careerlog.server.user.domain.User;

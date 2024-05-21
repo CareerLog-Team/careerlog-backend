@@ -1,7 +1,7 @@
-package careerlog.server.common.exception;
+package careerlog.server.common.response.exception;
 
 
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.resultcode.ResultCode;
 import lombok.Getter;
 
 @Getter

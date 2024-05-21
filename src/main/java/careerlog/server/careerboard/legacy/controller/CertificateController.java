@@ -2,7 +2,7 @@ package careerlog.server.careerboard.legacy.controller;
 
 
 import careerlog.server.common.dto.ResponseDto;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.resultcode.ResultCode;
 import careerlog.server.careerboard.domain.Certificate;
 import careerlog.server.careerboard.dto.request.add.AddCertificateRequestDto;
 import careerlog.server.careerboard.dto.request.remove.RemoveCertificateRequestDto;
