@@ -17,6 +17,10 @@ public class FirebaseConfig {
 
     @PostConstruct
     public void init() throws IOException {
+        if (!FirebaseApp.getApps().isEmpty()) {
+            return;
+        }
+
         String firebaseSdkRelativePath = "src/main/resources/firebase.json";
 
         File file = new File(firebaseSdkRelativePath);
