@@ -1,7 +1,7 @@
-package careerlog.server.common.exception;
+package careerlog.server.common.response.exception;
 
 import careerlog.server.common.dto.ResponseDto;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.resultcode.ResultCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

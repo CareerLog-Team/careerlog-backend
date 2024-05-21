@@ -1,8 +1,8 @@
 package careerlog.server.user.service;
 
 
-import careerlog.server.common.exception.CustomException;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
 import careerlog.server.user.domain.User;
 import careerlog.server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

@@ -5,8 +5,8 @@ import careerlog.server.auth.dto.SignInRequestDto;
 import careerlog.server.auth.dto.SignUpAdminRequestDto;
 import careerlog.server.auth.dto.SignUpRequestDto;
 import careerlog.server.common.dto.ResponseDto;
-import careerlog.server.common.resultcode.ResultCode;
-import careerlog.server.config.SecurityUtils;
+import careerlog.server.common.response.resultcode.ResultCode;
+import careerlog.server.config.security.SecurityUtils;
 import careerlog.server.jwt.JwtToken;
 import careerlog.server.user.domain.User;
 import careerlog.server.user.service.UserService;
@@ -24,7 +24,7 @@ public class AuthController {
 
     // 1. 로그인
     @PostMapping("/sign-in")
-    public ResponseDto<JwtToken> signIn(
+    public JwtToken signIn(
             @RequestHeader(value = "Authorization", required = false) String jwtToken,
             @RequestBody SignInRequestDto signInRequestDto
     ) {
@@ -32,13 +32,7 @@ public class AuthController {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(user.getUserId(), signInRequestDto.getPassword());
 
-        JwtToken token = authService.signIn(authenticationToken);
-
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                token,
-                ResultCode.SUCCESS.getMessage()
-        );
+        return authService.signIn(authenticationToken);
     }
 
     // 2. 로그아웃
@@ -49,55 +43,23 @@ public class AuthController {
 
     // 3. 회원가입
     @PostMapping("/sign-up")
-    public ResponseDto<?> signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
+    public String signUp(@RequestBody SignUpRequestDto signUpRequestDto) {
         userService.addUser(signUpRequestDto.toUser());
-
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                ResultCode.SUCCESS.getMessage()
-        );
+        return "ok";
     }
 
     @PostMapping("/sign-up/admin")
-    public ResponseDto<?> signUpAdmin(@RequestBody SignUpAdminRequestDto signUpAdminRequestDto) {
+    public String signUpAdmin(@RequestBody SignUpAdminRequestDto signUpAdminRequestDto) {
         userService.addUser(signUpAdminRequestDto.toUser());
-
-        // 자동로그인하게 되면 로직 추가
-
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                ResultCode.SUCCESS.getMessage()
-        );
+        return "ok";
     }
 
     // 4. 회원탈퇴
     @PostMapping("/with-draw")
-    public ResponseDto<?> withDraw() {
+    public String withDraw() {
         User user = userService.getUserById(SecurityUtils.getCurrentUserId());
         userService.withDrawUser(user);
 
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                ResultCode.SUCCESS.getMessage()
-        );
+        return "ok";
     }
-
-
-    // 테스트 메서드
-    @GetMapping("/test/user")
-    public ResponseDto<?> testUser() {
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                "일반 사용자 로그인 성공"
-        );
-    }
-
-    @GetMapping("/test/admin")
-    public ResponseDto<?> testAdmin() {
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                "어드민 사용자 로그인 성공"
-        );
-    }
-
 }

@@ -2,8 +2,8 @@ package careerlog.server.workrecord.service;
 
 
 import careerlog.server.careerboard.domain.Career;
-import careerlog.server.common.exception.CustomException;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
 import careerlog.server.workrecord.domain.WorkRecord;
 import careerlog.server.workrecord.repository.WorkRecordRepository;
 import lombok.RequiredArgsConstructor;

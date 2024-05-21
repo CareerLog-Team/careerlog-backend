@@ -1,9 +1,7 @@
 package careerlog.server.resume;
 
 
-import careerlog.server.common.dto.ResponseDto;
-import careerlog.server.common.resultcode.ResultCode;
-import careerlog.server.config.SecurityUtils;
+import careerlog.server.config.security.SecurityUtils;
 import careerlog.server.resume.domain.ResumeItem;
 import careerlog.server.resume.domain.ResumeType;
 import careerlog.server.resume.dto.CreateResumeRequestDto;
@@ -25,21 +23,16 @@ public class ResumeController {
     private final UserService userService;
 
     @GetMapping("/list")
-    public ResponseDto<?> getResumeTypes() {
+    public List<ResumeTypeResponseDto> getResumeTypes() {
         List<ResumeType> resumeTypes = resumeService.getResumeTypes();
-        List<ResumeTypeResponseDto> resumeTypeResponseDtos = resumeTypes.stream()
+
+        return resumeTypes.stream()
                 .map(ResumeTypeResponseDto::new)
                 .toList();
-
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                resumeTypeResponseDtos,
-                ResultCode.SUCCESS.getMessage()
-        );
     }
 
     @PostMapping("/create")
-    public ResponseDto<Void> createResume(@RequestBody CreateResumeRequestDto createResumeRequestDto) {
+    public String createResume(@RequestBody CreateResumeRequestDto createResumeRequestDto) {
         String userId = SecurityUtils.getCurrentUserId();
         User user = userService.getUserById(userId);
 
@@ -52,9 +45,6 @@ public class ResumeController {
 
         resumeService.addResume(user, resumeItems, resumeTypeCode);
 
-        return new ResponseDto<>(
-                ResultCode.SUCCESS.getCode(),
-                ResultCode.SUCCESS.getMessage()
-        );
+        return "ok";
     }
 }

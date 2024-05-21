@@ -2,7 +2,7 @@ package careerlog.server.jwt;
 
 
 import careerlog.server.common.dto.ResponseDto;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.resultcode.ResultCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

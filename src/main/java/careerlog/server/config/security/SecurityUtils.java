@@ -1,7 +1,7 @@
-package careerlog.server.config;
+package careerlog.server.config.security;
 
-import careerlog.server.common.exception.CustomException;
-import careerlog.server.common.resultcode.ResultCode;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

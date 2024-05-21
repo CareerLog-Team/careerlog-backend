@@ -1,4 +1,4 @@
-package careerlog.server.config;
+package careerlog.server.config.aws;
 
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
