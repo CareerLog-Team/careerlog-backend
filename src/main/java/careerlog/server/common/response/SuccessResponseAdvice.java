@@ -6,18 +6,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "careerlog.server")
 public class SuccessResponseAdvice implements ResponseBodyAdvice {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        return true;
+        return MappingJackson2HttpMessageConverter.class.isAssignableFrom(converterType);
     }
 
     @Override
@@ -36,12 +37,16 @@ public class SuccessResponseAdvice implements ResponseBodyAdvice {
             return body;
         }
 
-        if (resolve.is2xxSuccessful()) {
-            return new ResponseDto<>(
-                    ResultCode.SUCCESS.getCode(),
-                    body,
-                    ResultCode.SUCCESS.getMessage()
-            );
+        try{
+            if (resolve.is2xxSuccessful()) {
+                return new ResponseDto<>(
+                        ResultCode.SUCCESS.getCode(),
+                        body,
+                        ResultCode.SUCCESS.getMessage()
+                );
+            }
+        } catch (Exception e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
         }
 
         return body;

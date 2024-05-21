@@ -5,11 +5,14 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class ResponseDto<T> {
-    private final Integer code;
+    private final LocalDateTime timestamp = LocalDateTime.now();
+    private Integer code;
     private T data;
-    private final String message;
+    private String message;
 
 
     public ResponseDto(Integer code, String message) {
