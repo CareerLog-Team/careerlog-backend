@@ -11,6 +11,8 @@ build/
 **/src/test/resources/*.properties
 **/src/main/resources/*.yml
 **/src/test/resources/*.yml
+!**/src/main/resources/env/env.yml
+
 
 ### Firebase ###
  **/src/main/resources/firebase.json
