@@ -22,7 +22,7 @@ public class Resume extends BaseTimeEntity {
     private List<ResumeItem> resumeItems = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
-    private ResumeType resumeType;
+    private ResumeStyle resumeStyle;
 
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,9 +30,9 @@ public class Resume extends BaseTimeEntity {
     private User user;
 
     @Builder
-    public Resume(List<ResumeItem> resumeItems, ResumeType resumeType, User user) {
+    public Resume(List<ResumeItem> resumeItems, ResumeStyle resumeStyle, User user) {
         setResumeItems(resumeItems);
-        this.resumeType = resumeType;
+        this.resumeStyle = resumeStyle;
         this.user = user;
     }
 

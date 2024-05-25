@@ -29,13 +29,18 @@ public class SecurityConfig {
 
     // TODO : 변경 필요
     private static final String[] AUTH_WHITELIST = {
-            "/swagger-ui/**",
+            "/","/**/*.png","/**/*.jpg","/**/*.js","/**/*.css","/**/*.html","/**/*.gif","/**/*.svg","/**/*.txt",
             "/api/v0/auth/sign-in", "/api/v0/auth/sign-in/**",
             "/api/v0/auth/sign-up", "/api/v0/auth/sign-up/**"
     };
 
     private static final String[] AUTH_BLACKLIST = {
-            "/api/v1/**"
+            "/api/v0/auth/with-draw", "/api/v0/auth/with-draw/**",
+            "/api/v0/auth/sign-out", "/api/v0/auth/sign-out/**",
+            "/api/v0/career-board", "/api/v0/career-board/**",
+            "/api/v0/work-record", "/api/v0/work-record/**",
+            "/api/v0/file", "/api/v0/file/**",
+            "/api/v0/resume", "/api/v0/resume/**",
     };
 
     @Bean
@@ -61,10 +66,12 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         (authorize) -> authorize
-                        .requestMatchers(AUTH_WHITELIST).permitAll()       // 인증 없이 접근 가능한 경로
-                        .anyRequest().authenticated()                      // 인증 없이 접근 가능한 경로 외 모든 경로는 인증이 필요
-//                        .requestMatchers(AUTH_BLACKLIST).authenticated()   // 접근에 인증이 필요한 경로
-//                        .anyRequest().denyAll()                            // 그 외 모든 요청 차단
+                        .requestMatchers("/domain/**", "/public/**", "/actuator", "/swagger-ui/**",
+                                "/v3/api-docs/**", "/actuator/**", "/metrics/**").permitAll()   //Swagger는 항상 오픈
+                        .requestMatchers(AUTH_WHITELIST).permitAll()                                  // 인증 없이 접근 가능한 경로
+                        .requestMatchers(AUTH_BLACKLIST).authenticated()                              // 접근에 인증이 필요한 경로
+                        .anyRequest().denyAll()                                                       // 그 외 모든 요청 차단
+//                        .anyRequest().authenticated()                            // (임시용) 인증 없이 접근 가능한 경로 외 모든 경로는 인증이 필요
                 )
                 .addFilterBefore(
                         new JwtAuthenticationFilter(jwtTokenProvider),

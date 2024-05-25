@@ -9,11 +9,13 @@ import careerlog.server.careerboard.dto.request.remove.RemoveCertificateRequestD
 import careerlog.server.careerboard.dto.request.update.UpdateCertificateRequestDto;
 import careerlog.server.careerboard.dto.response.CertificateResponseDto;
 import careerlog.server.careerboard.service.CertificateService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Hidden
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v0/certificate")

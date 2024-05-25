@@ -9,11 +9,13 @@ import careerlog.server.careerboard.dto.request.remove.RemoveActivityRequestDto;
 import careerlog.server.careerboard.dto.request.update.UpdateActivityRequestDto;
 import careerlog.server.careerboard.dto.response.ActivityResponseDto;
 import careerlog.server.careerboard.service.ActivityService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Hidden // SWAGGER에서 숨기기
 @RestController
 @RequestMapping("/api/v0/activity")
 @RequiredArgsConstructor

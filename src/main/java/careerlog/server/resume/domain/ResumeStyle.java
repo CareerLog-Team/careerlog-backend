@@ -12,23 +12,23 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "resume_master")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ResumeType extends BaseTimeEntity {
+public class ResumeStyle extends BaseTimeEntity {
 
     /*
     ResumeTypeCode Convention -> RESUME_{Region}_{Number} => RESUME_KR_01 / RESUME_EN_01
      */
     @Id @Column(unique = true)
-    private String resumeTypeCode;
-    private String resumeTypeName;
+    private String resumeStyleCode;
+    private String resumeStyleName;
     // 해외 이력서 추가를 염두 (최초에는 무조건 KR)
-    private String resumeTypeRegion;
+    private String resumeStyleRegion;
     private String thumbNailImageUrl;
 
     @Builder
-    public ResumeType(String resumeTypeCode, String resumeTypeName) {
-        this.resumeTypeCode = resumeTypeCode;
-        this.resumeTypeName = resumeTypeName;
-        this.resumeTypeRegion = "KR";
+    public ResumeStyle(String resumeStyleCode, String resumeStyleName) {
+        this.resumeStyleCode = resumeStyleCode;
+        this.resumeStyleName = resumeStyleName;
+        this.resumeStyleRegion = "KR";
         this.thumbNailImageUrl = "hello world";
     }
 }

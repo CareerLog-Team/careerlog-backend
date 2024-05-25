@@ -9,11 +9,13 @@ import careerlog.server.careerboard.dto.request.remove.RemoveLinkRequestDto;
 import careerlog.server.careerboard.dto.request.update.UpdateLinkRequestDto;
 import careerlog.server.careerboard.dto.response.LinkResponseDto;
 import careerlog.server.careerboard.service.LinkService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Hidden
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v0/link")

@@ -20,9 +20,7 @@ public class JwtDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-
         ResultCode resultCode = ResultCode.UNAUTHORIZED_TOKEN;
-
         ResponseDto<Void> responseDto = new ResponseDto<>(
                 resultCode.getCode(),
                 null,

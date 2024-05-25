@@ -9,11 +9,13 @@ import careerlog.server.careerboard.dto.request.remove.RemoveLanguageRequestDto;
 import careerlog.server.careerboard.dto.request.update.UpdateLanguageRequestDto;
 import careerlog.server.careerboard.dto.response.LanguageResponseDto;
 import careerlog.server.careerboard.service.LanguageService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Hidden
 @RestController
 @RequestMapping("/api/v0/language")
 @RequiredArgsConstructor
