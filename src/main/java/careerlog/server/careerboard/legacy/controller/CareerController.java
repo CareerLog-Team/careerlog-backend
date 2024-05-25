@@ -9,11 +9,13 @@ import careerlog.server.careerboard.dto.response.CareerResponseDto;
 import careerlog.server.careerboard.dto.request.remove.RemoveCareerRequestDto;
 import careerlog.server.careerboard.dto.request.update.UpdateCareerRequestDto;
 import careerlog.server.careerboard.service.CareerService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Hidden
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v0/career")

@@ -3,6 +3,7 @@ package careerlog.server.common.response;
 import careerlog.server.common.dto.ResponseDto;
 import careerlog.server.common.response.resultcode.ResultCode;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+@Slf4j
 @RestControllerAdvice(basePackages = "careerlog.server")
 public class SuccessResponseAdvice implements ResponseBodyAdvice {
 
@@ -46,7 +48,7 @@ public class SuccessResponseAdvice implements ResponseBodyAdvice {
                 );
             }
         } catch (Exception e) {
-            System.out.println("e.getMessage() = " + e.getMessage());
+            log.warn("e.getMessage() = " + e.getMessage());
         }
 
         return body;

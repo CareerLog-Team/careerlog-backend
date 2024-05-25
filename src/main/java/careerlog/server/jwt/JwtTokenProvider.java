@@ -29,14 +29,9 @@ public class JwtTokenProvider {
 
     private final Key key;
 
-    @Value("${jwt.grant_type}")
-    private String grantType;
-
-    @Value("${jwt.access_expires_in}")
-    private long accessTokenExpiresIn;
-
-    @Value("${jwt.refresh_expires_in}")
-    private long refreshTokenExpiresIn;
+    private final String grantType = "Bearer";
+    private final long accessTokenExpiresIn = 1 * 1 * 10 * 60 * 1000L;
+    private final long refreshTokenExpiresIn = 7 * 24 * 60 * 60 * 1000L;
 
     public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);

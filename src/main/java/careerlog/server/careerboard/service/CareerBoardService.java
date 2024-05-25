@@ -22,6 +22,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class CareerBoardService {
+
     private final CareerBoardRepository careerBoardRepository;
 
     private final ActivityService activityService;
@@ -35,6 +36,11 @@ public class CareerBoardService {
     public CareerBoard getCareerBoardByUser(User user) {
         return careerBoardRepository.findCareerBoardByUser(user)
                 .orElseThrow(() -> new CustomException(ResultCode.CAREER_BOARD_NOT_FOUND_EXCEPTION));
+    }
+
+    public void addCareerBoard(User user) {
+        CareerBoard careerBoard = CareerBoard.createCareerBoard("", user);
+        careerBoardRepository.save(careerBoard);
     }
 
     // save 로직 작성 필요
@@ -61,7 +67,6 @@ public class CareerBoardService {
 //        for (Activity newActivity : newActivities) {
 //
 //        }
-//
 //    }
 
     @Transactional

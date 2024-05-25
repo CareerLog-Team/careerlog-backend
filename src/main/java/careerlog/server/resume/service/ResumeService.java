@@ -5,7 +5,7 @@ import careerlog.server.common.response.exception.CustomException;
 import careerlog.server.common.response.resultcode.ResultCode;
 import careerlog.server.resume.domain.Resume;
 import careerlog.server.resume.domain.ResumeItem;
-import careerlog.server.resume.domain.ResumeType;
+import careerlog.server.resume.domain.ResumeStyle;
 import careerlog.server.resume.repository.ResumeRepository;
 import careerlog.server.resume.repository.ResumeTypeRepository;
 import careerlog.server.user.domain.User;
@@ -30,7 +30,7 @@ public class ResumeService {
         return resumeRepository.findResumesByUser(user);
     }
 
-    public List<ResumeType> getResumeTypes() {
+    public List<ResumeStyle> getResumeTypes() {
         return resumeTypeRepository.findAll();
     }
 
@@ -38,7 +38,7 @@ public class ResumeService {
         // userId는 다운로드 받은 이력서를 파일에 저장할 때, 필요
 
         Resume resume = Resume.builder()
-                .resumeType(getResumeType(resumeTypeCode))
+                .resumeStyle(getResumeStyle(resumeTypeCode))
                 .resumeItems(resumeItems)
                 .user(user)
                 .build();
@@ -53,9 +53,9 @@ public class ResumeService {
          */
     }
 
-    private ResumeType getResumeType(String resumeTypeCode) {
+    private ResumeStyle getResumeStyle(String resumeStyleCode) {
         // TODO : NO RESUME TYPE EXCEPTION / RESUME EXCEPTION 로 변경
-        return resumeTypeRepository.findById(resumeTypeCode)
+        return resumeTypeRepository.findById(resumeStyleCode)
                 .orElseThrow(() -> new CustomException(ResultCode.INTERNAL_SERVER_ERROR));
     }
 }

@@ -15,13 +15,15 @@ public class JwtAuthenticationFilter extends GenericFilter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        String token = resolveToken((HttpServletRequest) servletRequest);
-
         try {
-            if (token != null && jwtTokenProvider.validateToken(token)) {
+            String token = resolveToken((HttpServletRequest) servletRequest);
+
+//            if (token != null && jwtTokenProvider.validateToken(token)) {
+            if (jwtTokenProvider.validateToken(token)) {
                 Authentication authentication = jwtTokenProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+
         } catch (Exception e) {
             servletRequest.setAttribute("exception", e);
         }

@@ -14,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,6 +33,14 @@ public class User extends BaseTimeEntity implements UserDetails {
     private String email;
 
     private String password;
+
+    private String phoneNumber;
+
+    private LocalDate birthDate;
+
+    private String gender;
+
+    private Boolean isAgreeMarketing;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -80,9 +89,13 @@ public class User extends BaseTimeEntity implements UserDetails {
     }
 
     @Builder
-    public User(String email, String password, UserRole userRole) {
+    public User(String email, String password, String phoneNumber, LocalDate birthDate, String gender, Boolean isAgreeMarketing, UserRole userRole) {
         this.email = email;
         this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.gender = gender;
+        this.isAgreeMarketing = isAgreeMarketing;
         this.userRole = userRole;
         this.userStatus = UserStatus.ACTIVATE;
     }

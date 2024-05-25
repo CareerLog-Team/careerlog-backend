@@ -4,6 +4,7 @@ on:
     branches: [ main ]
 
 env:
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
   S3_BUCKET_NAME: careerlog-git-action-prod-s3
   CODE_DEPLOY_NAME: careerlog-prod-code-deploy
   CODE_DEPLOY_GROUP_NAME: careerlog-prod-codedeploy-group
