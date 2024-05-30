@@ -113,7 +113,7 @@ public class CareerBoard extends BaseTimeEntity {
         return splitSkills(this.skills);
     }
 
-    public void setSkills(List<String> skills) {
+    public void updateSkills(List<String> skills) {
         this.skills = joinSkills(skills);
     }
 

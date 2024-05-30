@@ -4,7 +4,6 @@ package careerlog.server.careerboard.service;
 import careerlog.server.careerboard.domain.*;
 import careerlog.server.careerboard.dto.request.add.*;
 import careerlog.server.careerboard.dto.request.remove.*;
-import careerlog.server.careerboard.dto.request.save.SaveAutoRequestDto;
 import careerlog.server.careerboard.dto.request.update.*;
 import careerlog.server.careerboard.repository.CareerBoardRepository;
 import careerlog.server.common.response.exception.CustomException;
@@ -16,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -43,7 +44,7 @@ public class CareerBoardService {
         careerBoardRepository.save(careerBoard);
     }
 
-    // save 로직 작성 필요
+    /* save 로직 작성 필요
 //    public void saveActivityProcess(List<Activity> activities, List<Activity> newActivities) {
 //        // 1. 기존 activity Map 으로 변환
 //        Map<String, Activity> existingActivities = activities
@@ -68,175 +69,206 @@ public class CareerBoardService {
 //
 //        }
 //    }
+     */
+
+    @Transactional
+    public void saveActivity(
+            CareerBoard careerBoard,
+            List<String> removeActivityIds,
+            List<Activity> updateActivities,
+            List<Activity> addActivities
+    ) {
+        // 1. 항목 제거
+        for (String removeActivityId : removeActivityIds) {
+            activityService.removeActivityById(removeActivityId);
+        }
+
+        // 2. 업데이트
+        List<Activity> findActivities = careerBoard.getActivities();
+        Map<String, Activity> updateActivitiesMap = updateActivities.stream()
+                .collect(Collectors.toMap(Activity::getActivityId, activity -> activity));
+
+        for (Activity findActivity : findActivities) {
+            findActivity.updateActivity(updateActivitiesMap.get(findActivity.getActivityId()));
+        }
+
+        // 3. 항목 추가
+        for (Activity addActivity : addActivities) {
+            careerBoard.addActivity(addActivity);
+        }
+    }
+
+    @Transactional
+    public void saveActivity2(
+            User user,
+            List<RemoveActivityRequestDto> removeActivityRequestDtos,
+            List<UpdateActivityRequestDto> updateActivityRequestDtos,
+            List<AddActivityRequestDto> addActivityRequestDtos
+    ) {
+        CareerBoard careerBoard = getCareerBoardByUser(user);
+
+        // 1. 제거
+        List<String> removeActivityIds = removeActivityRequestDtos.stream()
+                .map(RemoveActivityRequestDto::getActivityId)
+                .toList();
+        for (String removeActivityId : removeActivityIds) {
+            activityService.removeActivityById(removeActivityId);
+        }
+
+        // 2. 업데이트
+        List<Activity> updateActivities = updateActivityRequestDtos.stream()
+                .map(UpdateActivityRequestDto::toActivityWithId)
+                .toList();
+        Map<String, Activity> updateActivitiesMap = updateActivities.stream()
+                .collect(Collectors.toMap(Activity::getActivityId, activity -> activity));
+        List<Activity> findActivities = careerBoard.getActivities();
+
+        for (Activity findActivity : findActivities) {
+            findActivity.updateActivity(updateActivitiesMap.get(findActivity.getActivityId()));
+        }
+
+        // 3. 항목 추가
+        List<Activity> addActivities = addActivityRequestDtos.stream()
+                .map(AddActivityRequestDto::toActivityWithoutId)
+                .toList();
+
+        for (Activity addActivity : addActivities) {
+            careerBoard.addActivity(addActivity);
+        }
+    }
+
+
 
     @Transactional
     public void saveCareer(
             CareerBoard careerBoard,
-            List<RemoveCareerRequestDto> removeCareerRequestDtos,
-            List<UpdateCareerRequestDto> updateCareerRequestDtos,
-            List<AddCareerRequestDto> addCareerRequestDtos
+            List<String> removeCareerIds,
+            List<Career> updateCareers,
+            List<Career> addCareers
     ) {
-        // 1. 삭제 로직
-        for (RemoveCareerRequestDto removeCareerRequestDto : removeCareerRequestDtos) {
-            careerService.removeCareer(removeCareerRequestDto.getCareerId());
+        for (String removeCareerId : removeCareerIds) {
+            careerService.removeCareer(removeCareerId);
         }
 
-        // 2. 업데이트 로직
-        List<Career> careersWithId = updateCareerRequestDtos.stream()
-                .map(UpdateCareerRequestDto::toCareerEntityWithId)
-                .toList();
+        // 2. 업데이트
+        List<Career> findCareers = careerBoard.getCareers();
+        Map<String, Career> updateCareersMap = updateCareers.stream()
+                .collect(Collectors.toMap(Career::getCareerId, career -> career));
 
-        careerService.updateCareers(careersWithId);
-
-        // 3. 추가 로직
-        addCareerRequestDtos.stream()
-                .map(AddCareerRequestDto::toCareerEntityWithoutId)
-                .forEach(careerBoard::addCareer);
-    }
-
-    @Transactional
-    public void saveEducation(
-            CareerBoard careerBoard,
-            List<RemoveEducationRequestDto> removeEducationRequestDtos,
-            List<UpdateEducationRequestDto> updateEducationRequestDtos,
-            List<AddEducationRequestDto> addEducationRequestDtos
-    ) {
-        // 1. 삭제 로직
-        for (RemoveEducationRequestDto removeEducationRequestDto : removeEducationRequestDtos) {
-            educationService.removeEducation(removeEducationRequestDto.getEducationId());
+        for (Career findCareer : findCareers) {
+            findCareer.updateCareer(updateCareersMap.get(findCareer.getCareerId()));
         }
 
-
-        // 2. 업데이트 로직
-        List<Education> educationsWithId = updateEducationRequestDtos.stream()
-                .map(UpdateEducationRequestDto::toEducationWithId)
-                .toList();
-
-        educationService.updateEducations(educationsWithId);
-
-        // 3. 추가 로직
-        addEducationRequestDtos.stream()
-                .map(AddEducationRequestDto::toEducationWithoutId)
-                .forEach(careerBoard::addEducation);
+        // 3. 항목 추가
+        for (Career addCareer : addCareers) {
+            careerBoard.addCareer(addCareer);
+        }
     }
 
     @Transactional
     public void saveCertificate(
             CareerBoard careerBoard,
-            List<RemoveCertificateRequestDto> removeCertificateRequestDtos,
-            List<UpdateCertificateRequestDto> updateCertificateRequestDtos,
-            List<AddCertificateRequestDto> addCertificateRequestDtos
+            List<String> removeCertificateIds,
+            List<Certificate> updateCertificates,
+            List<Certificate> addCertificates
     ) {
         // 1. 삭제 로직
-        for (RemoveCertificateRequestDto removeCertificateRequestDto : removeCertificateRequestDtos) {
-            certificateService.removeCertificate(removeCertificateRequestDto.getCertificateId());
+        for (String removeCertificateId : removeCertificateIds) {
+            certificateService.removeCertificate(removeCertificateId);
         }
 
         // 2. 수정 로직
-        List<Certificate> certificatesWithId = updateCertificateRequestDtos.stream()
-                .map(UpdateCertificateRequestDto::toCertificateWithId)
-                .toList();
+        List<Certificate> findCertificates = careerBoard.getCertificates();
+        Map<String, Certificate> updateCertificatesMap = updateCertificates.stream()
+                .collect(Collectors.toMap(Certificate::getCertificateId, certificate -> certificate));
 
-        certificateService.updateCertificates(certificatesWithId);
-
-        // 3. 추가 로직
-        addCertificateRequestDtos.stream()
-                .map(AddCertificateRequestDto::toCertificateWithoutId)
-                .forEach(careerBoard::addCertificate);
-    }
-
-    @Transactional
-    public void saveActivity(
-            CareerBoard careerBoard,
-            List<RemoveActivityRequestDto> removeActivityRequestDtos,
-            List<UpdateActivityRequestDto> updateActivityRequestDtos,
-            List<AddActivityRequestDto> addActivityRequestDtos
-    ) {
-        for (RemoveActivityRequestDto removeActivityRequestDto : removeActivityRequestDtos) {
-            activityService.removeActivityById(removeActivityRequestDto.getActivityId());
+        for (Certificate findCertificate : findCertificates) {
+            findCertificate.updateCertificate(updateCertificatesMap.get(findCertificate.getCertificateId()));
         }
 
-        List<Activity> activitiesWithId = updateActivityRequestDtos.stream()
-                .map(UpdateActivityRequestDto::toActivityWithId)
-                .toList();
-        activityService.updateActivities(activitiesWithId);
-
-        addActivityRequestDtos.stream()
-                .map(AddActivityRequestDto::toActivityWithoutId)
-                .forEach(careerBoard::addActivity);
+        for (Certificate addCertificate : addCertificates) {
+            careerBoard.addCertificate(addCertificate);
+        }
     }
 
     @Transactional
-    public void saveAuto(
+    public void saveEducation(
             CareerBoard careerBoard,
-            SaveAutoRequestDto saveAutoRequestDto
+            List<String> removeEducationIds,
+            List<Education> updateEducations,
+            List<Education> addEducations
     ) {
-        saveLanguage(
-                careerBoard,
-                saveAutoRequestDto.getSaveLanguageRequestDto().getRemoveLanguageRequestDtos(),
-                saveAutoRequestDto.getSaveLanguageRequestDto().getUpdateLanguageRequestDtos(),
-                saveAutoRequestDto.getSaveLanguageRequestDto().getAddLanguageRequestDtos()
-        );
+        // 1. 삭제 로직
+        for (String removeEducationId : removeEducationIds) {
+            educationService.removeEducation(removeEducationId);
+        }
 
-        saveLink(
-                careerBoard,
-                saveAutoRequestDto.getSaveLinkRequestDto().getRemoveLinkRequestDtos(),
-                saveAutoRequestDto.getSaveLinkRequestDto().getUpdateLinkRequestDtos(),
-                saveAutoRequestDto.getSaveLinkRequestDto().getAddLinkRequestDtos()
-        );
+        List<Education> findEducations = careerBoard.getEducations();
+        Map<String, Education> updateEducationsMap = updateEducations.stream()
+                .collect(Collectors.toMap(Education::getEducationId, education -> education));
 
-        saveSkills(
-                careerBoard,
-                saveAutoRequestDto.getSkills()
-        );
+        for (Education findEducation : findEducations) {
+            findEducation.updateEducation(updateEducationsMap.get(findEducation.getEducationId()));
+        }
+
+        for (Education addEducation : addEducations) {
+            careerBoard.addEducation(addEducation);
+        }
     }
 
     @Transactional // Transactional을 달고있는 Method는 private를 할 수 없음
-    protected void saveLanguage(
+    public void saveLanguage(
             CareerBoard careerBoard,
-            List<RemoveLanguageRequestDto> removeLanguageRequestDtos,
-            List<UpdateLanguageRequestDto> updateLanguageRequestDtos,
-            List<AddLanguageRequestDto> addLanguageRequestDtos
+            List<String> removeLanguageIds,
+            List<Language> updateLanguages,
+            List<Language> addLanguages
     ) {
-        for (RemoveLanguageRequestDto removeLanguageRequestDto : removeLanguageRequestDtos) {
-            languageService.removeLanguage(removeLanguageRequestDto.getLanguageId());
+        for (String removeLanguageId : removeLanguageIds) {
+            languageService.removeLanguage(removeLanguageId);
         }
 
-        List<Language> languagesWithId = updateLanguageRequestDtos.stream()
-                .map(UpdateLanguageRequestDto::toLanguageWithId)
-                .toList();
+        List<Language> findLanguages = careerBoard.getLanguages();
+        Map<String, Language> updateLanguagesMap = updateLanguages.stream()
+                .collect(Collectors.toMap(Language::getLanguageId, language -> language));
 
-        languageService.updateLanguages(languagesWithId);
+        for (Language findLanguage : findLanguages) {
+            findLanguage.updateLanguage(updateLanguagesMap.get(findLanguage.getLanguageId()));
+        }
 
-        addLanguageRequestDtos.stream()
-                .map(AddLanguageRequestDto::toLanguageWithoutId)
-                .forEach(careerBoard::addLanguage);
+        for (Language addLanguage : addLanguages) {
+            careerBoard.addLanguage(addLanguage);
+        }
     }
 
     @Transactional
-    protected void saveLink (
+    public void saveLink (
             CareerBoard careerBoard,
-            List<RemoveLinkRequestDto> removeLinkRequestDtos,
-            List<UpdateLinkRequestDto> updateLinkRequestDtos,
-            List<AddLinkRequestDto> addLinkRequestDtos
+            List<String> removeLinkIds,
+            List<Link> updateLinks,
+            List<Link> addLinks
     ) {
-        for (RemoveLinkRequestDto removeLinkRequestDto : removeLinkRequestDtos) {
-            languageService.removeLanguage(removeLinkRequestDto.getLinkId());
+        for (String removeLinkId : removeLinkIds) {
+            linkService.removeLink(removeLinkId);
         }
 
-        List<Link> linksWithId = updateLinkRequestDtos.stream()
-                .map(UpdateLinkRequestDto::toLinkWithId)
-                .toList();
+        List<Link> findLinks = careerBoard.getLinks();
+        Map<String, Link> updateLinksMap = updateLinks.stream()
+                .collect(Collectors.toMap(Link::getLink, link -> link));
 
-        linkService.updateLinks(linksWithId);
+        for (Link findLink : findLinks) {
+            findLink.updateLink(updateLinksMap.get(findLink.getLinkId()));
+        }
 
-        addLinkRequestDtos.stream()
-                .map(AddLinkRequestDto::toLinkWithoutId)
-                .forEach(careerBoard::addLink);
+        for (Link addLink : addLinks) {
+            careerBoard.addLink(addLink);
+        }
     }
 
     @Transactional
-    protected void saveSkills(CareerBoard careerBoard, List<String> links) {
-        careerBoard.setSkills(links);
+    public void saveSkills(
+            CareerBoard careerBoard,
+            List<String> links
+    ) {
+        careerBoard.updateSkills(links);
     }
 }

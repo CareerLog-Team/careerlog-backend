@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 @Getter
 public class ResponseDto<T> {
     private final LocalDateTime timestamp = LocalDateTime.now();
-    private Integer code;
+    private final String code;
     private T data;
-    private String message;
+    private final String message;
 
 
-    public ResponseDto(Integer code, String message) {
+    public ResponseDto(String code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public ResponseDto(Integer code, T data, String message) {
+    public ResponseDto(String code, T data, String message) {
         this.code = code;
         this.data = data;
         this.message = message;
