@@ -58,7 +58,7 @@ public class WorkRecordController {
     @Operation(summary = "업무 경력 생성 API", description = "사용자의 업무 경력을 생성하는 API 입니다.")
     @PostMapping("/create")
     public String addWorkRecord(@RequestBody AddWorkRecordRequestDto addWorkRecordRequestDto) {
-        Career career = careerService.getCareer(addWorkRecordRequestDto.getCareerId());
+        Career career = careerService.getCareerById(addWorkRecordRequestDto.getCareerId());
         WorkRecord addWorkRecord = addWorkRecordRequestDto.toWorkRecordWithoutId();
 
         workRecordService.addWorkRecord(career, addWorkRecord);

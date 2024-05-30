@@ -3,12 +3,14 @@ package careerlog.server.careerboard.dto.request.add;
 
 import careerlog.server.careerboard.domain.Activity;
 import careerlog.server.utils.LocalDateUtils;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
 
 @Data
 @Getter
+@Builder
 public class AddActivityRequestDto {
 
     private String activityName;

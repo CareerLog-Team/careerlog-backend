@@ -17,6 +17,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.Arrays;
+
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -27,11 +31,11 @@ public class SecurityConfig {
     private final AccessDeniedHandler accessDeniedHandler;
 
 
-    // TODO : 변경 필요
     private static final String[] AUTH_WHITELIST = {
-            "/","/**/*.png","/**/*.jpg","/**/*.js","/**/*.css","/**/*.html","/**/*.gif","/**/*.svg","/**/*.txt",
-            "/api/v0/auth/sign-in", "/api/v0/auth/sign-in/**",
-            "/api/v0/auth/sign-up", "/api/v0/auth/sign-up/**"
+            "/api/v0/auth/sign-in",
+            "/api/v0/auth/sign-in/**",
+            "/api/v0/auth/sign-up",
+            "/api/v0/auth/sign-up/**"
     };
 
     private static final String[] AUTH_BLACKLIST = {
@@ -71,7 +75,6 @@ public class SecurityConfig {
                         .requestMatchers(AUTH_WHITELIST).permitAll()                                  // 인증 없이 접근 가능한 경로
                         .requestMatchers(AUTH_BLACKLIST).authenticated()                              // 접근에 인증이 필요한 경로
                         .anyRequest().denyAll()                                                       // 그 외 모든 요청 차단
-//                        .anyRequest().authenticated()                            // (임시용) 인증 없이 접근 가능한 경로 외 모든 경로는 인증이 필요
                 )
                 .addFilterBefore(
                         new JwtAuthenticationFilter(jwtTokenProvider),
