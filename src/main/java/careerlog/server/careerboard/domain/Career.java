@@ -1,6 +1,8 @@
 package careerlog.server.careerboard.domain;
 
 import careerlog.server.common.entity.BaseTimeEntity;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
 import careerlog.server.workrecord.domain.WorkRecord;
 import jakarta.persistence.*;
 import lombok.*;
@@ -56,10 +58,9 @@ public class Career extends BaseTimeEntity {
     /*
     업무 경력
      */
-    @OneToMany(mappedBy = "career")
+    @OneToMany(mappedBy = "career", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WorkRecord> workRecords = new ArrayList<>();
 
-    @Setter(AccessLevel.PROTECTED)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "careerBoardId")
     private CareerBoard careerBoard;
@@ -87,7 +88,16 @@ public class Career extends BaseTimeEntity {
     }
 
     public void addWorkRecord(WorkRecord workRecord) {
-        workRecords.add(workRecord);
+        this.workRecords.add(workRecord);
         workRecord.setCareer(this);
+    }
+
+    public void setCareerBoard(CareerBoard careerBoard) {
+        if (this.careerBoard != null) {
+            // 이미 CareerBoard가 세팅되어있다는 Exception을 반환
+            throw new CustomException(ResultCode.INTERNAL_SERVER_ERROR);
+        }
+
+        this.careerBoard = careerBoard;
     }
 }

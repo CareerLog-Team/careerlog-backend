@@ -2,6 +2,8 @@ package careerlog.server.careerboard.domain;
 
 
 import careerlog.server.common.entity.BaseTimeEntity;
+import careerlog.server.common.response.exception.CustomException;
+import careerlog.server.common.response.resultcode.ResultCode;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,7 +43,6 @@ public class Certificate extends BaseTimeEntity {
      */
     private String agency;
 
-    @Setter(AccessLevel.PROTECTED)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "careerBoardId")
     private CareerBoard careerBoard;
@@ -62,5 +63,14 @@ public class Certificate extends BaseTimeEntity {
         this.score = updateCertificate.getScore();
         this.acquisitionDt = updateCertificate.getAcquisitionDt();
         this.agency = updateCertificate.getAgency();
+    }
+
+    public void setCareerBoard(CareerBoard careerBoard) {
+        if (this.careerBoard != null) {
+            // 이미 CareerBoard가 세팅되어있다는 Exception을 반환
+            throw new CustomException(ResultCode.INTERNAL_SERVER_ERROR);
+        }
+
+        this.careerBoard = careerBoard;
     }
 }
