@@ -21,37 +21,37 @@ public class CareerBoard extends BaseTimeEntity {
     /*
     업무 경력
      */
-    @OneToMany(mappedBy = "careerBoard")
+    @OneToMany(mappedBy = "careerBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Career> careers = new ArrayList<>();
 
     /*
     학력
      */
-    @OneToMany(mappedBy = "careerBoard")
+    @OneToMany(mappedBy = "careerBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Education> educations = new ArrayList<>();
 
     /*
     활동 & 경험
      */
-    @OneToMany(mappedBy = "careerBoard")
+    @OneToMany(mappedBy = "careerBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Activity> activities = new ArrayList<>();
 
     /*
     자격
      */
-    @OneToMany(mappedBy = "careerBoard")
+    @OneToMany(mappedBy = "careerBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Certificate> certificates = new ArrayList<>();
 
     /*
     외국어
      */
-    @OneToMany(mappedBy = "careerBoard")
+    @OneToMany(mappedBy = "careerBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Language> languages = new ArrayList<>();
 
     /*
     링크
      */
-    @OneToMany(mappedBy = "careerBoard")
+    @OneToMany(mappedBy = "careerBoard", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Link> links = new ArrayList<>();
 
     /*
@@ -80,33 +80,33 @@ public class CareerBoard extends BaseTimeEntity {
 
     // 추가 로직
     public void addActivity(Activity addActivity) {
-        activities.add(addActivity);
         addActivity.setCareerBoard(this);
+        this.activities.add(addActivity);
     }
 
     public void addEducation(Education addEducation) {
-        educations.add(addEducation);
         addEducation.setCareerBoard(this);
+        this.educations.add(addEducation);
     }
 
     public void addCertificate(Certificate addCertificate) {
-        certificates.add(addCertificate);
         addCertificate.setCareerBoard(this);
+        this.certificates.add(addCertificate);
     }
 
     public void addCareer(Career addCareer) {
-        careers.add(addCareer);
         addCareer.setCareerBoard(this);
+        this.careers.add(addCareer);
     }
 
     public void addLanguage(Language addLanguage) {
-        languages.add(addLanguage);
         addLanguage.setCareerBoard(this);
+        this.languages.add(addLanguage);
     }
 
     public void addLink(Link addLink) {
-        links.add(addLink);
         addLink.setCareerBoard(this);
+        this.links.add(addLink);
     }
 
     public List<String> getSkills() {
