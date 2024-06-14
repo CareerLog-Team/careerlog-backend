@@ -17,13 +17,13 @@
 
 #### 1. 이력 관리 대시보드 페이지
 
-  <img src="https://i.ibb.co/F3CbMgp/image.png" alt="이력 관리 대시보드 페이지">
+  <img src="https://i.ibb.co/F3CbMgp/image.png" alt="이력 관리 대시보드 페이지"> <br>
 사용자가 입력한 이력의 내용을 조회 및 수정 할 수 있는 페이지 입니다.
   </div>
   <div style="width: 48%;">
 
 #### 2. 업무 기록 관리 페이지
-  <img src="https://i.ibb.co/b2YFYgg/image.png" alt="업무 기록 관리 페이지">
+  <img src="https://i.ibb.co/b2YFYgg/image.png" alt="업무 기록 관리 페이지"> <br>
 사용자의 이력(Career)을 기반으로 업무 기록을 관리 할 수 있는 페이지 입니다. 본 페이지에서는 프로젝트 및 본인의 업무 내용을 작성합니다.
   </div>
 </div>
@@ -32,14 +32,14 @@
   <div style="width: 48%;">
 
 #### 3. 파일 관리 페이지
-<img src="https://i.ibb.co/2kYLqr3/image.png" alt="파일 관리 페이지">
+<img src="https://i.ibb.co/2kYLqr3/image.png" alt="파일 관리 페이지"> <br>
 사용자의 이력과 관련된 파일을 저장 및 관리하는 페이지 입니다.
   </div>
 
   <div style="width: 48%;">
 
 #### 4. 이력서 선택 화면
-  <img src="https://i.ibb.co/rMLM92p/image.png" alt="이력서 선택 화면">
+  <img src="https://i.ibb.co/rMLM92p/image.png" alt="이력서 선택 화면"> <br>
 이력서 제작에 활용할 6가지 템플릿을 선택하는 페이지 입니다.
  </div>
 </div>
