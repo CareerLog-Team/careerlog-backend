@@ -9,7 +9,7 @@
 > 작성된 내용을 기반으로 이력서를 추출해주는 기능을 제공하고 있습니다.
 
 ### 서비스 기획안
-![서비스 이미지](https://file.notion.so/f/f/75b30cfc-7641-4538-bd0c-e5cf49c9f645/86b4bd7e-e947-4213-9ae3-0b6f8ff3a5bc/%E1%84%8F%E1%85%A5%E1%84%85%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3_%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3_%E1%84%80%E1%85%AE%E1%84%8C%E1%85%A9-min.png?id=6fc0a407-c237-4ccc-96a9-f70acd0b6eca&table=block&spaceId=75b30cfc-7641-4538-bd0c-e5cf49c9f645&expirationTimestamp=1717668000000&signature=L5dxtsWpWM8Fnl-mWOQCDs2k2IJIBaZ1zWEAbks-wkM&downloadName=%E1%84%8F%E1%85%A5%E1%84%85%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3+%E1%84%89%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3+%E1%84%80%E1%85%AE%E1%84%8C%E1%85%A9-min.png)
+![서비스 이미지](https://i.ibb.co/GCQ3Wky/image.png)
 
 ### 서비스 대표 기능 화면
 <div style="display: flex; justify-content: space-between;">
@@ -17,13 +17,13 @@
 
 #### 1. 이력 관리 대시보드 페이지
 
-  <img src="https://file.notion.so/f/f/75b30cfc-7641-4538-bd0c-e5cf49c9f645/f2cced84-b92e-4d58-846e-47f3394d2e32/%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB_%E1%84%8B%E1%85%B5%E1%84%85%E1%85%A7%E1%86%A8%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5_%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB.png?id=a1b09d36-fb1f-4f64-ae9b-4853ce052f10&table=block&spaceId=75b30cfc-7641-4538-bd0c-e5cf49c9f645&expirationTimestamp=1717689600000&signature=qDjtZD-C20cjVC3Ou7GFn3mrqFC_VrPGhS6sbZLXksE&downloadName=%E1%84%86%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AB+%E1%84%8B%E1%85%B5%E1%84%85%E1%85%A7%E1%86%A8%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5+%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB.png" alt="이력 관리 대시보드 페이지">
+  <img src="https://i.ibb.co/F3CbMgp/image.png" alt="이력 관리 대시보드 페이지">
 사용자가 입력한 이력의 내용을 조회 및 수정 할 수 있는 페이지 입니다.
   </div>
   <div style="width: 48%;">
 
 #### 2. 업무 기록 관리 페이지
-  <img src="https://file.notion.so/f/f/75b30cfc-7641-4538-bd0c-e5cf49c9f645/cee18503-b15b-409f-a467-2588bd0ba2ac/%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%86%E1%85%AE%E1%84%80%E1%85%B5%E1%84%85%E1%85%A9%E1%86%A8.png?id=712e84e0-4b03-46cc-906f-6633d0c65e17&table=block&spaceId=75b30cfc-7641-4538-bd0c-e5cf49c9f645&expirationTimestamp=1717675200000&signature=0rw5RRI1kDOQM1vhbPj3JofHHYf8KRimcdSNg_2H-Cg&downloadName=%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%86%E1%85%AE%E1%84%80%E1%85%B5%E1%84%85%E1%85%A9%E1%86%A8.png" alt="업무 기록 관리 페이지">
+  <img src="https://i.ibb.co/b2YFYgg/image.png" alt="업무 기록 관리 페이지">
 사용자의 이력(Career)을 기반으로 업무 기록을 관리 할 수 있는 페이지 입니다. 본 페이지에서는 프로젝트 및 본인의 업무 내용을 작성합니다.
   </div>
 </div>
@@ -32,14 +32,14 @@
   <div style="width: 48%;">
 
 #### 3. 파일 관리 페이지
-<img src="https://file.notion.so/f/f/75b30cfc-7641-4538-bd0c-e5cf49c9f645/1f9fac76-c8df-42ee-af68-791b1c0eff70/%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%8C%E1%85%A5%E1%84%8C%E1%85%A1%E1%86%BC.png?id=f891d9d6-7197-47b7-9912-903b486b74bd&table=block&spaceId=75b30cfc-7641-4538-bd0c-e5cf49c9f645&expirationTimestamp=1717689600000&signature=DAspS4MDlfe9pSf22t46P_73TNqZa9_7JTzbaXtbH2c&downloadName=%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF%E1%84%8C%E1%85%A5%E1%84%8C%E1%85%A1%E1%86%BC.png" alt="파일 관리 페이지">
+<img src="https://i.ibb.co/2kYLqr3/image.png" alt="파일 관리 페이지">
 사용자의 이력과 관련된 파일을 저장 및 관리하는 페이지 입니다.
   </div>
 
   <div style="width: 48%;">
 
 #### 4. 이력서 선택 화면
-  <img src="https://file.notion.so/f/f/75b30cfc-7641-4538-bd0c-e5cf49c9f645/c38c9022-b925-4614-afa8-229bad6b768a/Untitled.png?id=f33dee5e-d5cf-43da-98ec-18daf90416ba&table=block&spaceId=75b30cfc-7641-4538-bd0c-e5cf49c9f645&expirationTimestamp=1717689600000&signature=G44MCjMtINa7-E3k_6FsWVFU0HcZpN-4EbHF_qVnIaI&downloadName=Untitled.png" alt="이력서 선택 화면">
+  <img src="https://i.ibb.co/rMLM92p/image.png" alt="이력서 선택 화면">
 이력서 제작에 활용할 6가지 템플릿을 선택하는 페이지 입니다.
  </div>
 </div>
@@ -97,13 +97,13 @@ PW : test1234
 ## 프로젝트 구조
 
 ### 서비스 구조
-![서비스 구조](https://file.notion.so/f/f/75b30cfc-7641-4538-bd0c-e5cf49c9f645/291aaa92-6346-47f6-bc8b-a5c1cbd5e4b0/Untitled.png?id=dbfdf84a-d1d3-4d03-87e3-39aa09a5fd30&table=block&spaceId=75b30cfc-7641-4538-bd0c-e5cf49c9f645&expirationTimestamp=1717668000000&signature=ChltYxQoK6tzpufWppBq97hzr2N1sfEVykoXjpzh9uw&downloadName=Untitled.png)
+![서비스 구조](https://i.ibb.co/McmB62f/image.png)
 
 [//]: # (### Api 구조도)
 [//]: # (![API 구조]&#40;&#41;)
 
 ### ERD
-![ERD](https://file.notion.so/f/f/75b30cfc-7641-4538-bd0c-e5cf49c9f645/44c49599-b2b2-4097-866b-e29b25becbb4/CareerLog_ERD.png?id=33e03849-3e45-4d3a-874c-c71bc344cd95&table=block&spaceId=75b30cfc-7641-4538-bd0c-e5cf49c9f645&expirationTimestamp=1717668000000&signature=pU-8Jieq0aOw4t-RYFPc_QOFCQjxKH1zhDSZL4y2HOg&downloadName=CareerLog_ERD.png)
+![ERD](https://i.ibb.co/ncPNkMy/Career-Log-ERD.png)
 
 ## 주요 기능
 
