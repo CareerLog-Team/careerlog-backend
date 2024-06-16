@@ -21,17 +21,18 @@ public class WebConfig implements WebMvcConfigurer {
     private final ObjectMapper objectMapper;
     private final LoggerInterceptor loggerInterceptor;
 
-    private static final String[] EXCLUDE_PATHS = {
-            "/css/**", "/images/**", "/js/**"
+    private static final String[] EXCLUDE_PATH_PATTERNS = {
+            "/css/**", "/images/**", "/js/**", "/error", "/*.ico"
     };
-
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // loggerInterceptor 추가 +
         // Interceptor 를 수행하지 않는 PathPattern 추가
         registry.addInterceptor(loggerInterceptor)
-                .excludePathPatterns(EXCLUDE_PATHS);
+                .order(1)
+                .addPathPatterns("/**")
+                .excludePathPatterns(EXCLUDE_PATH_PATTERNS);
     }
 
     @Override

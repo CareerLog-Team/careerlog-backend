@@ -19,9 +19,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v0/auth")
@@ -69,6 +71,10 @@ public class AuthController {
         User user = userService.addUser(signUpRequestDto.toUser());
         careerBoardService.addCareerBoard(user);
 
+        log.debug("일반 회원 가입을 수행합니다 :: [userId => {} / Email => {} / PW => {}]",
+                user.getUserId(), signUpRequestDto.getEmail(), signUpRequestDto.getPassword());
+        log.info("일반 회원 가입이 정상적으로 처리되었습니다 :: [Email => {}]", signUpRequestDto.getEmail());
+
         return "ok";
     }
 
@@ -79,7 +85,12 @@ public class AuthController {
     @Operation(summary = "회원가입 API", description = "어드민 계정 회원가입 API입니다. 일반적으로 활용하지 않습니다.")
     @PostMapping("/sign-up/admin")
     public String signUpAdmin(@RequestBody SignUpAdminRequestDto signUpAdminRequestDto) {
-        userService.addUser(signUpAdminRequestDto.toUser());
+        User user = userService.addUser(signUpAdminRequestDto.toUser());
+
+        log.debug("어드민 회원 가입을 수행합니다 :: [userId => {} / Email => {} / PW => {}]",
+                user.getUserId(), signUpAdminRequestDto.getEmail(), signUpAdminRequestDto.getPassword());
+        log.info("어드민 회원 가입이 정상적으로 처리되었습니다 :: [Email => {}]", signUpAdminRequestDto.getEmail());
+
         return "ok";
     }
 
@@ -92,6 +103,8 @@ public class AuthController {
     public String withDraw() {
         User user = userService.getUserById(SecurityUtils.getCurrentUserId());
         userService.withDrawUser(user);
+
+        log.info("회원 탈퇴가 정상적으로 처리되었습니다");
 
         return "ok";
     }

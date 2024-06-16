@@ -16,10 +16,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v0/resume")
 @RequiredArgsConstructor
@@ -37,6 +39,9 @@ public class ResumeController {
     @GetMapping("/styles")
     public List<ResumeStyleResponseDto> getResumeStyles() {
         List<ResumeStyle> resumeStyles = resumeService.getResumeTypes();
+
+        log.info("이력서 형식 리스트가 조회되었습니다.");
+        log.debug("이력서 형식 개수 : {}개", resumeStyles.size());
 
         return resumeStyles.stream()
                 .map(ResumeStyleResponseDto::new)
@@ -60,6 +65,17 @@ public class ResumeController {
         String resumeTypeCode = createResumeRequestDto.getResumeTypeCode();
 
         resumeService.addResume(user, resumeItems, resumeTypeCode);
+
+        log.info("이력서 생성이 완료되었습니다.");
+        log.debug("""
+                유저 ID : {}
+                이력서 스타일 : {}
+                이력서에 포함한 항목 개수 : {}
+                """,
+                userId,
+                resumeTypeCode,
+                resumeItems.size()
+        );
 
         return "ok";
     }

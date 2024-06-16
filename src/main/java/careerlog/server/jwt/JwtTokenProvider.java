@@ -66,6 +66,13 @@ public class JwtTokenProvider {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
+        log.debug("Token 만료 시점 => {}", accessTokenExpiresDate);
+        log.debug("""
+                Token 발급 완료
+                [accessToken => {}]
+                [refreshToken => {}]
+                """, accessToken, refreshToken);
+
         return JwtToken.builder()
                 .grantType(grantType)
                 .accessToken(accessToken)

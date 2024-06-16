@@ -136,6 +136,18 @@ public class CareerBoardService {
         for (Activity addActivity : addActivities) {
             careerBoard.addActivity(addActivity);
         }
+
+        log.debug(
+                """
+                저장 타입 : 활동 & 경험 (Activity)
+                제거 여부 : {}
+                업데이트 여부 : {}
+                추가 여부 : {}
+                """,
+                !removeActivityIds.isEmpty(),
+                !updateActivities.isEmpty(),
+                !addActivities.isEmpty()
+        );
     }
 
 
@@ -178,6 +190,19 @@ public class CareerBoardService {
         for (Career addCareer : addCareers) {
             careerBoard.addCareer(addCareer);
         }
+
+        log.debug(
+                """
+                저장 타입 : 이력 (Career)
+                제거 여부 : {}
+                업데이트 여부 : {}
+                추가 여부 : {}
+                """,
+                !removeCareerIds.isEmpty(),
+                !updateCareers.isEmpty(),
+                !addCareers.isEmpty()
+        );
+
     }
 
     @Transactional
@@ -218,6 +243,18 @@ public class CareerBoardService {
         for (Certificate addCertificate : addCertificates) {
             careerBoard.addCertificate(addCertificate);
         }
+
+        log.debug(
+                """
+                저장 타입 : 자격 (Certificate)
+                제거 여부 : {}
+                업데이트 여부 : {}
+                추가 여부 : {}
+                """,
+                !removeCertificateIds.isEmpty(),
+                !updateCertificates.isEmpty(),
+                !addCertificates.isEmpty()
+        );
     }
 
     @Transactional
@@ -257,6 +294,18 @@ public class CareerBoardService {
         for (Education addEducation : addEducations) {
             careerBoard.addEducation(addEducation);
         }
+
+        log.debug(
+                """
+                저장 타입 : 학력 (Education)
+                제거 여부 : {}
+                업데이트 여부 : {}
+                추가 여부 : {}
+                """,
+                !removeEducationIds.isEmpty(),
+                !updateEducations.isEmpty(),
+                !addEducations.isEmpty()
+        );
     }
 
     @Transactional // Transactional을 달고있는 Method는 private를 할 수 없음
@@ -295,6 +344,18 @@ public class CareerBoardService {
         for (Language addLanguage : addLanguages) {
             careerBoard.addLanguage(addLanguage);
         }
+
+        log.debug(
+                """
+                저장 타입 : 외국어 (Language)
+                제거 여부 : {}
+                업데이트 여부 : {}
+                추가 여부 : {}
+                """,
+                !removeLanguageIds.isEmpty(),
+                !updateLanguages.isEmpty(),
+                !addLanguages.isEmpty()
+        );
     }
 
     @Transactional
@@ -333,6 +394,18 @@ public class CareerBoardService {
         for (Link addLink : addLinks) {
             careerBoard.addLink(addLink);
         }
+
+        log.debug(
+                """
+                저장 타입 : 링크 (Link)
+                제거 여부 : {}
+                업데이트 여부 : {}
+                추가 여부 : {}
+                """,
+                !removeLinkIds.isEmpty(),
+                !updateLinks.isEmpty(),
+                !addLinks.isEmpty()
+        );
     }
 
     @Transactional
@@ -342,5 +415,13 @@ public class CareerBoardService {
     ) {
         CareerBoard careerBoard = getCareerBoardByUser(user);
         careerBoard.updateSkills(links);
+
+        log.debug(
+                """
+                저장 타입 : 스킬 (Skill)
+                업데이트 여부 : {}
+                """,
+                !links.isEmpty()
+        );
     }
 }

@@ -21,6 +21,17 @@ public class AuthService {
 
     public JwtToken signIn(UsernamePasswordAuthenticationToken authenticationToken) {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+
+        log.info("로그인에 성공하였습니다.");
+        log.debug("""
+                이메일 : {}
+                비밀번호 : {}
+                권한 : {}""",
+                authentication.getCredentials(),
+                authentication.getPrincipal(),
+                authentication.getAuthorities()
+        );
+
         return tokenProvider.generateToken(authentication);
 
         // refreshToken 저장 로직 나중에 저장

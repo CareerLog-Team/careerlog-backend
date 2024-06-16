@@ -55,10 +55,27 @@ public class FileService {
                 .build();
 
         fileRepository.save(addFile);
+
+        log.info("파일이 추가되었습니다.");
+        log.debug(
+                """
+                파일명 : {}
+                파일 URL : {}
+                파일 사이즈 : {}
+                파일 확장자 : {}
+                """,
+                originalFilename,
+                uploadedFileUrl,
+                fileSize,
+                ext
+        );
     }
 
     @Transactional
     public void removeFile(File removeFile) {
         fileRepository.delete(removeFile);
+
+        log.info("파일이 제거되었습니다.");
+        log.debug("파일 ID : {}", removeFile.getFileId());
     }
 }
