@@ -11,9 +11,9 @@ permissions:
     owner: ubuntu
     group: ubuntu
 
-hooks:
-  # 배포 후 custom 작업 정의
-  AfterInstall:
-    - location: ./app/scripts/deploy-prod.sh
-      timeout: 180
-      runas: root   # docker
+#hooks:
+#  # 배포 후 custom 작업 정의
+#  AfterInstall:
+#    - location: ./app/scripts/deploy-prod.sh
+#      timeout: 180
+#      runas: root   # docker
